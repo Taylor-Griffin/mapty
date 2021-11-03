@@ -74,7 +74,7 @@ class App {
     this._getLocalStorage();
 
     // Hide Reset Button
-    resetBtn.style.opacity = 0;
+    if (this.#workouts.length === 0) resetBtn.style.opacity = 0;
 
     //Attach event handlers
     form.addEventListener('submit', this._newWorkout.bind(this));
@@ -84,6 +84,7 @@ class App {
     console.log(this.#workouts);
     resetBtn.addEventListener('click', () => {
       this.reset();
+      //   resetBtn.style.opacity = 0;
     });
   }
   _getPosition() {
@@ -267,6 +268,7 @@ class App {
     localStorage.setItem('workouts', JSON.stringify(this.#workouts));
   }
   _getLocalStorage() {
+    resetBtn.style.opacity = 1;
     const data = JSON.parse(localStorage.getItem('workouts'));
     if (!data) return;
     this.#workouts = data;
