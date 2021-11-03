@@ -41,6 +41,23 @@ a:visited {
 }
 
 /* SIDEBAR */
+.reset_btn {
+  padding: 1rem;
+  width: 25%;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+  background-color: var(--color-light--3);
+  transition: all 0.3s;
+}
+
+.reset_btn:hover {
+  background-color: var(--color-brand--2);
+  /* color: var(--color-light--3); */
+}
+.reset_btn:active {
+  transform: scale(0.5);
+}
 .sidebar {
   flex-basis: 50rem;
   background-color: var(--color-dark--1);

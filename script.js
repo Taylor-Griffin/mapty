@@ -49,9 +49,6 @@ class Cycling extends Workout {
     return this.speed;
   }
 }
-// const run1 = new Running([39, -12], 5.2, 24, 178);
-// const cycling1 = new Cycling([39, -12], 27, 95, 523);
-// console.log(run1, cycling1);
 
 ///////////////////////////////////////////////
 //Application Architecture
@@ -63,6 +60,7 @@ const inputDistance = document.querySelector('.form__input--distance');
 const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
+const resetBtn = document.querySelector('.reset_btn');
 class App {
   #map;
   #mapZoomLevel = 13;
@@ -75,11 +73,18 @@ class App {
     //Get data from local storage
     this._getLocalStorage();
 
+    // Hide Reset Button
+    resetBtn.style.opacity = 0;
+
     //Attach event handlers
     form.addEventListener('submit', this._newWorkout.bind(this));
 
     inputType.addEventListener('change', this._toggleElevationField);
     containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
+    console.log(this.#workouts);
+    resetBtn.addEventListener('click', () => {
+      this.reset();
+    });
   }
   _getPosition() {
     if (navigator.geolocation)
@@ -138,6 +143,9 @@ class App {
     const duration = +inputDuration.value;
     const { lat, lng } = this.#mapEvent.latlng;
     let workout;
+
+    // Show reset button
+    resetBtn.style.opacity = 1;
 
     //If workout is running, create running object
     if (type === 'running') {
